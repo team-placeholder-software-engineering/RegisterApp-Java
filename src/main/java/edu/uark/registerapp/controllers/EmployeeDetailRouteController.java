@@ -86,7 +86,7 @@ import edu.uark.registerapp.commands.exceptions.NotFoundException;
 import edu.uark.registerapp.controllers.enums.ViewModelNames;
 import edu.uark.registerapp.controllers.enums.ViewNames;
 import edu.uark.registerapp.models.api.Employee;
-//import edu.uark.registerapp.models.api.EmployeeType;
+import edu.uark.registerapp.models.api.EmployeeType;
 import edu.uark.registerapp.models.entities.ActiveUserEntity;
 
 @Controller
