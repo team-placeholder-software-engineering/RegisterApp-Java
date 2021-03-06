@@ -24,7 +24,7 @@ import edu.uark.registerapp.models.api.EmployeeType;
 import edu.uark.registerapp.models.entities.ActiveUserEntity;
 
 @Controller
-@RequestMapping(value = "/employee")
+@RequestMapping(value = "/employeeDetail")
 public class EmployeeDetailRouteController extends BaseRouteController {
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView start(
