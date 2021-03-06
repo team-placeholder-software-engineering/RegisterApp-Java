@@ -109,12 +109,12 @@ public class EmployeeDetailRouteController extends BaseRouteController {
 
 		if (employeeId.equals(new UUID(0, 0))) {
 			modelAndView.addObject(
-				ViewModelNames.EMPLOYEE.getValue(),
+				ViewModelNames.EMPLOYEE_DETAIL.getValue(),
 				(new Employee()).setIsInitialEmployee(isInitialEmployee));
 		} else {
 			try {
 				modelAndView.addObject(
-					ViewModelNames.EMPLOYEE.getValue(),
+					ViewModelNames.EMPLOYEE_DETAIL.getValue(),
 					this.employeeQuery
 						.setEmployeeId(employeeId)
 						.execute()
@@ -124,7 +124,7 @@ public class EmployeeDetailRouteController extends BaseRouteController {
 					ViewModelNames.ERROR_MESSAGE.getValue(),
 					e.getMessage());
 				modelAndView.addObject(
-					ViewModelNames.EMPLOYEE.getValue(),
+					ViewModelNames.EMPLOYEE_DETAIL.getValue(),
 					(new Employee()).setIsInitialEmployee(isInitialEmployee));
 			}
 		}
