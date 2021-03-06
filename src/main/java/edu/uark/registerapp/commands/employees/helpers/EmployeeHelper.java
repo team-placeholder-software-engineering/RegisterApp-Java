@@ -1,6 +1,8 @@
 package edu.uark.registerapp.commands.employees.helpers;
 
 import org.apache.commons.lang3.StringUtils;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class EmployeeHelper {
 	public static String padEmployeeId(final int employeeId) {
@@ -15,8 +17,16 @@ public class EmployeeHelper {
 	}
 
 	public static byte[] hashPassword(final String password) {
-		// TODO: Hash the password using a MessageDigest. An example can be found at http://tutorials.jenkov.com/java-cryptography/messagedigest.html
-		return new byte[0];
+		try {
+			final MessageDigest messageDigest =
+				MessageDigest.getInstance("SHA-256");
+
+			messageDigest.update(password.getBytes());
+
+			return messageDigest.digest();
+		} catch (final NoSuchAlgorithmException e) {
+			return new byte[0];
+		}
 	}
 
 	private static final int EMPLOYEE_ID_MAXIMUM_LENGTH = 5;
