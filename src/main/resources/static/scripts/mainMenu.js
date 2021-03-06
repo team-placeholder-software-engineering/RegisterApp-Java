@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
   getViewProductsActionElement().addEventListener("click", () => { window.location.assign("./productListing.html"); });
 
   getStartTransactionActionElement().addEventListener("click", () => { displayError("Functionality has not yet been implemented. Functionality"); });
-  //getViewProductsActionElement().addEventListener("click", () => { window.location.assign("/src/main/resources/templates/productDetail.html"); });
+  getViewProductsActionElement().addEventListener("click", () => { window.location.assign("/src/main/resources/templates/productDetail.html"); });
 
   getCreateEmployeeActionElement().addEventListener("click", () => { window.location.assign("./employeeDetail.html"); });
   getProductSalesReportActionElement().addEventListener("click", () => { displayError("Functionality has not yet been implemented."); });
