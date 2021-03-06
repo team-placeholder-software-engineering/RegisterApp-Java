@@ -21,7 +21,11 @@ import edu.uark.registerapp.controllers.enums.ViewNames;
 import edu.uark.registerapp.models.api.EmployeeSignIn;
 
 @Controller
+<<<<<<< HEAD
 @RequestMapping(value = "/employeeDetail")
+=======
+@RequestMapping(value = "/")
+>>>>>>> 06141cbda5734775a59903db2030628c0de1a51f
 public class SignInRouteController extends BaseRouteController {
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView showSignIn(
