@@ -13,7 +13,7 @@ import edu.uark.registerapp.controllers.enums.ViewNames;
 import edu.uark.registerapp.models.api.ApiResponse;
 
 @RestController
-@RequestMapping(value = "/api")
+@RequestMapping(value = "/api/employeeId")
 public class SignInRestController extends BaseRestController {
 	@RequestMapping(value="/signOut", method = RequestMethod.DELETE)
 	public @ResponseBody ApiResponse removeActiveUser(
