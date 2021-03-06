@@ -4,7 +4,7 @@ public enum ViewNames {
 	SIGN_IN("signIn", "/"),
 	MAIN_MENU("mainMenu"),
 	PRODUCT_DETAIL("productDetail"),
-	EMPLOYEE_DETAIL("employeeDetail"),
+	EMPLOYEE("employeeDetail"),
 	PRODUCT_LISTING("productListing");
 	
 	public String getRoute() {
