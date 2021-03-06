@@ -104,7 +104,7 @@ public class EmployeeDetailRouteController extends BaseRouteController {
 
 		ModelAndView modelAndView =
 			this.setErrorMessageFromQueryString(
-				new ModelAndView(ViewNames.EMPLOYEE.getViewName()),
+				new ModelAndView(ViewNames.EMPLOYEE_DETAIL.getViewName()),
 				queryParameters);
 
 		if (employeeId.equals(new UUID(0, 0))) {
