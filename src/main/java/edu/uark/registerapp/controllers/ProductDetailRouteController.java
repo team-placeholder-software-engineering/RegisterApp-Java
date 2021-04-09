@@ -48,7 +48,48 @@ public class ProductDetailRouteController {
 
 		return modelAndView;
 	}
+	
+	@RequestMapping(value = "/{productId}", method = RequestMethod.GET)
+	public ModelAndView startWithProduct(
+		@PathVariable final UUID productId,
+		@RequestParam final Map<String, String> queryParameters,
+		final HttpServletRequest request
+	) {
 
+		final Optional<ActiveUserEntity> activeUserEntity =
+			this.getCurrentUser(request);
+		if (!activeUserEntity.isPresent()) {
+			return this.buildInvalidSessionResponse();
+		}
+
+		final ModelAndView modelAndView =
+			this.setErrorMessageFromQueryString(
+				new ModelAndView(ViewNames.PRODUCT_DETAIL.getViewName()),
+				queryParameters);
+
+		modelAndView.addObject(
+			ViewModelNames.IS_ELEVATED_USER.getValue(),
+			EmployeeClassification.isElevatedUser(
+				activeUserEntity.get().getClassification()));
+
+		try {
+			modelAndView.addObject(
+				ViewModelNames.PRODUCT.getValue(),
+				this.productQuery.setProductId(productId).execute());
+		} catch (final Exception e) {
+			modelAndView.addObject(
+				ViewModelNames.ERROR_MESSAGE.getValue(),
+				e.getMessage());
+			modelAndView.addObject(
+				ViewModelNames.PRODUCT.getValue(),
+				(new Product())
+					.setCount(0)
+					.setLookupCode(StringUtils.EMPTY));
+		}
+
+		return modelAndView;
+	}
+	
 	// Properties
 	@Autowired
 	private ProductQuery productQuery;
