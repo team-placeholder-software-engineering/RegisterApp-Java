@@ -39,6 +39,8 @@ public class EmployeeCreateCommand implements ResultCommandInterface<Employee> {
 		return this.apiEmployee;
 	}
 
+    // validates that the new object has a first name
+    // last name, and password
 	// Helper methods
 	private void validateProperties() {
 		if (StringUtils.isBlank(this.apiEmployee.getFirstName())) {
