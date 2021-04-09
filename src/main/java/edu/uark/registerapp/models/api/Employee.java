@@ -8,7 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import edu.uark.registerapp.commands.employees.helpers.EmployeeHelper;
 import edu.uark.registerapp.models.entities.EmployeeEntity;
-
+//Employee object contains all of the data, getters, and setters for the employee
 public class Employee extends ApiResponse {
     private UUID id;
     public UUID getId() {
