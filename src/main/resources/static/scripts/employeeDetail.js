@@ -1,5 +1,5 @@
 let hideEmployeeSavedAlertTimer = undefined;
-
+//adds the click event handler when the page loads
 document.addEventListener("DOMContentLoaded", () => {
 	document.getElementById("saveButton")
 		.addEventListener("click", saveActionClick);
@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Save
 function saveActionClick(event) {
+	//Makes sure all the data entered is valid
 	if (!validateSave()) {
 		return;
 	}
@@ -23,6 +24,7 @@ function saveActionClick(event) {
 	const employeeIdIsDefined = (employeeId.trim() !== "");
 	const saveActionUrl = ("/api/employee/"
 		+ (employeeIdIsDefined ? employeeId : ""));
+	//gets all of the valid employee data 
 	const saveEmployeeRequest = {
 		id: employeeId,
 		managerId: getEmployeeManagerId(),
@@ -33,6 +35,7 @@ function saveActionClick(event) {
 	};
 
 	if (employeeIdIsDefined) {
+		//performs this patch if the employee exists
 		ajaxPatch(saveActionUrl, saveEmployeeRequest, (callbackResponse) => {
 			saveActionElement.disabled = false;
 
@@ -41,9 +44,9 @@ function saveActionClick(event) {
 			}
 		});
 	} else {
+		//performs this ajaxpost if the employee is new
 		ajaxPost(saveActionUrl, saveEmployeeRequest, (callbackResponse) => {
 			saveActionElement.disabled = false;
-
 			if (isSuccessResponse(callbackResponse)) {
 				completeSaveAction(callbackResponse);
 			}
@@ -53,6 +56,7 @@ function saveActionClick(event) {
 
 function validateSave() {
 	const firstNameEditElement = getEmployeeFirstNameEditElement();
+	//Checks if first name is blank
 	if (firstNameEditElement.value.trim() === "") {
 		displayError("Please provide a valid employee first name.");
 		firstNameEditElement.focus();
@@ -61,6 +65,7 @@ function validateSave() {
 	}
 
 	const lastNameEditElement = getEmployeeLastNameEditElement();
+	//Checks if last name is blank
 	if (lastNameEditElement.value.trim() === "") {
 		displayError("Please provide a valid employee last name.");
 		lastNameEditElement.focus();
@@ -69,20 +74,21 @@ function validateSave() {
 	}
 
 	const passwordEditElement = getEmployeePasswordEditElement();
+	//Checks if password is blank
 	if (passwordEditElement.value.trim() === "") {
 		displayError("Please provide a valid employee password.");
 		passwordEditElement.focus();
 		passwordEditElement.select();
 		return false;
 	}
-
+	//Checks if password and confirm password are the same
 	if (passwordEditElement.value !== getEmployeeConfirmPassword()) {
 		displayError("Passwords do not match.");
 		passwordEditElement.focus()
 		passwordEditElement.select();
 		return false;
 	}
-
+	//Checks if employee type is valid
 	const employeeTypeSelectElement = getEmployeeTypeSelectElement();
 	if (!employeeTypeSelectElement.closest("tr").classList.contains("hidden")) {
 		if (employeeTypeSelectElement.value <= 0) {
@@ -107,10 +113,12 @@ function completeSaveAction(callbackResponse) {
 		return;
 	}
 	
+	//displays the employee save alert
 	displayEmployeeSavedAlertModal();
 
 	const employeeEmployeeIdElement = getEmployeeEmployeeIdElement();
 	const employeeEmployeeIdRowElement = employeeEmployeeIdElement.closest("tr");
+	//if employee ID element is not visible then display it
 	if (employeeEmployeeIdRowElement.classList.contains("hidden")) {
 		setEmployeeId(callbackResponse.data.id);
 		employeeEmployeeIdElement.value = callbackResponse.data.employeeId;
@@ -119,6 +127,7 @@ function completeSaveAction(callbackResponse) {
 }
 
 function displayEmployeeSavedAlertModal() {
+	//checks if employee alert is hidden
 	if (hideEmployeeSavedAlertTimer) {
 		clearTimeout(hideEmployeeSavedAlertTimer);
 	}
