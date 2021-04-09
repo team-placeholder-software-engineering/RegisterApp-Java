@@ -26,6 +26,11 @@ import edu.uark.registerapp.models.api.Employee;
 @RestController
 @RequestMapping(value = "/api/employee")
 public class EmployeeRestController extends BaseRestController {
+	
+	//Route handler to create new employee
+	//Returns employee object
+	//Returns no active user to sign in page
+	//Returns non-elevated user to main menu
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	public @ResponseBody ApiResponse createEmployee(
 		@RequestBody final Employee employee,
@@ -45,7 +50,6 @@ public class EmployeeRestController extends BaseRestController {
 			isInitialEmployee = true;
 			canCreateEmployeeResponse = new ApiResponse();
 		}
-
 		if (!canCreateEmployeeResponse.getRedirectUrl().equals(StringUtils.EMPTY)) {
 			return canCreateEmployeeResponse;
 		}
@@ -68,6 +72,7 @@ public class EmployeeRestController extends BaseRestController {
 		return createdEmployee.setIsInitialEmployee(isInitialEmployee);
 	}
 
+	//Update employee returns updated employee as an employee object
 	@RequestMapping(value = "/{employeeId}", method = RequestMethod.PATCH)
 	public @ResponseBody ApiResponse updateEmployee(
 		@PathVariable final UUID employeeId,
