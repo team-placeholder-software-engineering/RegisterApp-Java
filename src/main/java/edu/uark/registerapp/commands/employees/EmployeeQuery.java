@@ -14,7 +14,9 @@ import edu.uark.registerapp.models.repositories.EmployeeRepository;
 
 @Service
 public class EmployeeQuery implements ResultCommandInterface<Employee> {
-	@Override
+	//Checks if employee entity is present and if not throws a not found
+    // exception
+    @Override
 	public Employee execute() {
 		final Optional<EmployeeEntity> employeeEntity =
 			this.employeeRepository.findById(this.employeeId);

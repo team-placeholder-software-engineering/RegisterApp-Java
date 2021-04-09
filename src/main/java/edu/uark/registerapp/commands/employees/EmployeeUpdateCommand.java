@@ -29,6 +29,8 @@ public class EmployeeUpdateCommand implements ResultCommandInterface<Employee> {
 	}
 
 	// Helper methods
+    // checks that the first and last name are not blank
+    // if one of them is blank throws an unprocessable entity exception
 	private void validateProperties() {
 		if (StringUtils.isBlank(this.apiEmployee.getFirstName())) {
 			throw new UnprocessableEntityException("first name");
@@ -41,6 +43,7 @@ public class EmployeeUpdateCommand implements ResultCommandInterface<Employee> {
 		}
 	}
 
+    // updates employee entity after validation
 	@Transactional
 	private void updateEmployeeEntity() {
 		final Optional<EmployeeEntity> queriedEmployeeEntity =
