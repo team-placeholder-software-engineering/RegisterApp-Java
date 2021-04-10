@@ -33,11 +33,11 @@ public class EmployeeDetailRouteController extends BaseRouteController {
 	) {
 
 		final boolean activeUserExists = this.activeUserExists();
-
+		//Checking if user exists.
 		if (activeUserExists) {
 			final Optional<ActiveUserEntity> activeUserEntity =
 				this.getCurrentUser(request);
-
+			//Checking if there is no active user.
 			if (!activeUserEntity.isPresent()) {
 				return this.buildInvalidSessionResponse();
 			} else if (!this.isElevatedUser(activeUserEntity.get())) {
